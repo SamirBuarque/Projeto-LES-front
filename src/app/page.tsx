@@ -1,11 +1,9 @@
 import styles from "./page.module.css";
-
+import FileUpload from '../components/FileUpload'
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h1>Home Page</h1>
-      </div>
-    </div>
+    <>
+      <FileUpload/>
+    </>
   );
 }
