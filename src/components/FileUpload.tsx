@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
-import styles from '../styles/FileUpload.module.css'; // Importando o CSS Module
+import styles from '../styles/FileUpload.module.css';
 
 const FileUpload: React.FC = () => {
   const [fileInfo, setFileInfo] = useState<string | null>(null);
@@ -49,7 +49,7 @@ const FileUpload: React.FC = () => {
       <div
         id={styles['drop-area']}
         ref={dropAreaRef}
-        className={styles.dropArea} // Aplicando estilos usando CSS module
+        className={styles.dropArea} 
         onDragEnter={handleDragEnter}
         onDragOver={preventDefaults}
         onDragLeave={handleDragLeave}
