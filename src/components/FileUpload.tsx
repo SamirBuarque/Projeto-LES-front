@@ -47,7 +47,7 @@ const FileUpload: React.FC = () => {
     <div className={styles.container}>
       <h2 className={styles.headerTitle}>Selecione seu arquivo PDF <span>📄</span></h2>
       <div
-        id="drop-area"
+        id={styles['drop-area']}
         ref={dropAreaRef}
         className={styles.dropArea} // Aplicando estilos usando CSS module
         onDragEnter={handleDragEnter}

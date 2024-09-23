@@ -1,115 +1,120 @@
-
 .container {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .headerTitle {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #2c2c2c;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2c2c2c;
 }
 
 #drop-area {
-    border: 2px solid #e2e2e2;
-    background-color: #fafafa;
-    border-radius: 12px;
-    padding: 40px;
-    width: 100%;
-    max-width: 500px;
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: border-color 0.3s;
-    margin: 0 auto;
-    display: flex; /* Adicionado */
-    flex-direction: column; /* Adicionado */
-    align-items: center; /* Adicionado */
-    justify-content: center; /* Adicionado */
-    min-height: 200px; /* Garantir que a área tenha altura mínima */
+  border: 2px solid #e2e2e2;
+  background-color: #fafafa;
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: border-color 0.3s;
+  margin: 0 auto;
+  display: flex; /* Adicionado */
+  flex-direction: column; /* Adicionado */
+  align-items: center; /* Adicionado */
+  justify-content: center; /* Adicionado */
+  min-height: 200px; /* Garantir que a área tenha altura mínima */
 }
 
 #drop-area.highlight {
-    border-color: #d1a5a5;
+  border-color: #d1a5a5;
 }
 
 .icon img {
-    width: 50px;
-    margin-bottom: 15px;
+  width: 50px;
+  margin-bottom: 15px;
 }
 
 #fileElem {
-    display: none;
+  display: none;
 }
 
 .button {
-    background-color: #a83232;
-    color: white;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 15px;
-    display: inline-block;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
+  background-color: #a83232;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  display: inline-block;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
 }
 
 .button:hover {
-    background-color: #8b2828;
+  background-color: #8b2828;
 }
 
 .paragraph {
-    font-size: 14px;
-    color: #888;
-    margin: 15px 0;
+  font-size: 14px;
+  color: #888;
+  margin: 15px 0;
 }
 
 #file-info {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #333;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
 }
 
 /* Estilos do ícone PDF */
-.pdf-icon {
-    width: 80px;
-    height: 100px;
-    background: linear-gradient(135deg, #f25022, #ff6347); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    border: 2px solid #D84E47;
+.pdfIcon {
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(135deg, #f25022, #ff6347);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #d84e47;
 }
 
-.pdf-icon::before {
-    content: 'PDF';
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 5px 10px;
-    background-color: rgba(0, 0, 0, 0.3); 
-    border-radius: 5px;
-    position: absolute;
-    bottom: -10px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+.pdfIcon::before {
+  content: "PDF";
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  position: absolute;
+  bottom: -10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.pdf-icon::after {
-    content: '';
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 40px;
-    background-color: white;
-    border-radius: 3px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transform: rotate(-20deg); 
+.pdfIcon::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 40px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: rotate(-20deg);
+}
+
+.fileInput {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 }
