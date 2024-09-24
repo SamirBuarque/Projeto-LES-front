@@ -35,13 +35,20 @@ const FileUpload: React.FC = () => {
   const handleFiles = (files: FileList) => {
     const file = files[0];
     if (file && file.type === "application/pdf") {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setFileInfo(`Arquivo PDF carregado: ${file.name}`);
-      };
-      reader.readAsDataURL(file);
+      setFileInfo(`Arquivo PDF carregado: ${file.name}`);
+      uploadFileToServer(file);
     } else {
       setFileInfo("Por favor, selecione um arquivo PDF.");
+    }
+  };
+
+  const uploadFileToServer = async (file: File) => {
+    try {
+      setUploadStatus("Fazendo upload do arquivo");
+      const response = await uploadFile(file); // função da API
+      setUploadStatus(`Upload concluído. Arquivo disponível em: ${response.fileDownloadUri}`);
+    } catch (error) {
+      setUploadStatus(`Erro ao fazer o upload do arquivo: ${error}`)
     }
   };
 
