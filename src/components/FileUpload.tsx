@@ -2,10 +2,12 @@
 
 import React, { useState, useRef } from 'react';
 import styles from '../styles/FileUpload.module.css';
+import {uploadFile} from '@/utils/api'
 
 const FileUpload: React.FC = () => {
   const [fileInfo, setFileInfo] = useState<string | null>(null);
   const dropAreaRef = useRef<HTMLDivElement>(null);
+  const [uploadStatus, setUploadStatus] = useState<string | null>(null)
 
   const preventDefaults = (e: React.DragEvent | React.ChangeEvent) => {
     e.preventDefault();
