@@ -2,16 +2,22 @@
 
 import React, { useState, useRef } from 'react';
 import styles from '../styles/FileUpload.module.css';
-import {uploadFile} from '@/utils/api'
+import {uploadFile} from '@/utils/api';
+import { useRouter } from 'next/navigation';
 
 const FileUpload: React.FC = () => {
   const [fileInfo, setFileInfo] = useState<string | null>(null);
   const dropAreaRef = useRef<HTMLDivElement>(null);
   const [uploadStatus, setUploadStatus] = useState<string | null>(null)
-
+  const router = useRouter();
+  
   const preventDefaults = (e: React.DragEvent | React.ChangeEvent) => {
     e.preventDefault();
     e.stopPropagation();
+  };
+
+  const handleNavigation = () => {
+    router.push('/tools')
   };
 
   const handleDragEnter = () => {
@@ -76,6 +82,13 @@ const FileUpload: React.FC = () => {
         <label className={styles.button} htmlFor="fileElem">
           Selecionar arquivo
         </label>
+        {uploadStatus && (
+          <div>
+            <button onClick={handleNavigation} className={styles.button}>
+              Enviar
+            </button>
+          </div>
+        )}  
       </div>
       <div id="file-info">{fileInfo && <p>{fileInfo}</p>}</div>
     </div>
