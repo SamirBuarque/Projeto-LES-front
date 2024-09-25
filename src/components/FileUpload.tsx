@@ -4,12 +4,14 @@ import React, { useState, useRef } from 'react';
 import styles from '../styles/FileUpload.module.css';
 import {uploadFile} from '@/utils/api';
 import { useRouter } from 'next/navigation';
+import { useFile } from '@/components/FileContext';
 
 const FileUpload: React.FC = () => {
   const [fileInfo, setFileInfo] = useState<string | null>(null);
   const dropAreaRef = useRef<HTMLDivElement>(null);
   const [uploadStatus, setUploadStatus] = useState<string | null>(null)
   const router = useRouter();
+  const { setFileName } = useFile();
   
   const preventDefaults = (e: React.DragEvent | React.ChangeEvent) => {
     e.preventDefault();
@@ -42,6 +44,7 @@ const FileUpload: React.FC = () => {
     const file = files[0];
     if (file && file.type === "application/pdf") {
       setFileInfo(`Arquivo PDF carregado: ${file.name}`);
+      setFileName(file.name);
       uploadFileToServer(file);
     } else {
       setFileInfo("Por favor, selecione um arquivo PDF.");

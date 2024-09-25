@@ -4,14 +4,45 @@ export const uploadFile = async (file) => {
   const formData = new FormData();
   formData.append("file", file);
 
-  const responde = await fetch(`${API_URL}/uploadFile`, {
+  const response = await fetch(`${API_URL}/uploadFile`, {
     method: "POST",
     body: formData,
   });
 
-  if (!responde.ok) {
+  if (!response.ok) {
     throw new Error("Erro ao fazer o upload do arquivo");
   }
 
-  return responde.json();
+  return response.json();
+};
+
+export const downloadFile = async (fileName) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8081/api/file/downloadFile/${fileName}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Erro ao baixar o arquivo");
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", fileName);
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+  } catch (error) {
+    console.log("Erro ao fazer o download do arquivo.", error);
+    throw error;
+  }
 };

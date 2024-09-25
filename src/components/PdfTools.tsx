@@ -2,12 +2,22 @@
 
 import React, { useState } from 'react';
 import styles from '../styles/PdfTools.module.css'; // Importando o CSS Module
+import {downloadFile} from '@/utils/api';
+import { useFile } from '@/components/FileContext';
 
 const PdfTools: React.FC = () => {
   const [generateSummary, setGenerateSummary] = useState(true);
   const [translateText, setTranslateText] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState('');
+  const { fileName } = useFile();
 
+  const handleDownload = () => {
+    if(fileName) {
+      downloadFile(fileName);
+    } else {
+      alert("Nenhum arquivo disponível para download")
+    }
+  }
   const handleConfirm = () => {
     console.log({
       generateSummary,
@@ -15,6 +25,7 @@ const PdfTools: React.FC = () => {
       selectedLanguage
     });
   };
+
 
   return (
     <div className={styles.container}>
@@ -66,8 +77,8 @@ const PdfTools: React.FC = () => {
         </div>
       </div>
 
-      <button className={styles.confirmButton} onClick={handleConfirm}>
-        Confirmar
+      <button className={styles.confirmButton} onClick={handleDownload}>
+        Baixar arquivo
       </button>
     </div>
   );
