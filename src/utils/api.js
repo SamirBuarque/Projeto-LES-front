@@ -19,7 +19,7 @@ export const uploadFile = async (file) => {
 export const downloadFile = async (fileName) => {
   try {
     const response = await fetch(
-      `http://localhost:8081/api/file/downloadFile/${fileName}`,
+      `${API_URL}/downloadFile/${fileName}`,
       {
         method: "GET",
         headers: {
