@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-
+import { FileProvider } from '@/components/FileContext';
 
 export default function RootLayout({
   children,
@@ -9,7 +9,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <FileProvider>
+          {children}
+        </FileProvider>
       </body>
     </html>
   );
