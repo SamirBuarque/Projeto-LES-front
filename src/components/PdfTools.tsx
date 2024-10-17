@@ -1,31 +1,34 @@
 "use client";
 
-import React, { useState } from 'react';
-import styles from '../styles/PdfTools.module.css'; // Importando o CSS Module
-import {downloadFile} from '@/utils/api';
-import { useFile } from '@/components/FileContext';
+import React, { useState } from "react";
+import styles from "../styles/PdfTools.module.css"; // Importando o CSS Module
+import { downloadFile, downloadSummaryFile } from "@/utils/api";
+import { useFile } from "@/components/FileContext";
 
 const PdfTools: React.FC = () => {
-  const [generateSummary, setGenerateSummary] = useState(true);
-  const [translateText, setTranslateText] = useState(true);
-  const [selectedLanguage, setSelectedLanguage] = useState('');
+  const [generateSummary, setGenerateSummary] = useState(false);
+  const [translateText, setTranslateText] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const { fileName } = useFile();
 
   const handleDownload = () => {
-    if(fileName) {
-      downloadFile(fileName);
+    if (fileName) {
+      if (generateSummary) {
+        downloadSummaryFile(fileName);
+      } else {
+        downloadFile(fileName);
+      }
     } else {
-      alert("Nenhum arquivo disponível para download")
+      alert("Nenhum arquivo disponível para download");
     }
-  }
+  };
   const handleConfirm = () => {
     console.log({
       generateSummary,
       translateText,
-      selectedLanguage
+      selectedLanguage,
     });
   };
-
 
   return (
     <div className={styles.container}>
@@ -33,17 +36,17 @@ const PdfTools: React.FC = () => {
 
       <div className={styles.pdfOptionsSection}>
         <div className={styles.pdfGroup}>
-          <div className={styles.pdfIcon}>
-            {/* Ícone do PDF */}
-          </div>
+          <div className={styles.pdfIcon}>{/* Ícone do PDF */}</div>
 
           <div className={styles.tools}>
             <label>
               <input
                 type="checkbox"
                 checked={generateSummary}
-                onChange={() => setGenerateSummary(!generateSummary)}
-              /> 
+                onChange={() => {
+                  setGenerateSummary(!generateSummary);
+                }}
+              />
               <strong>Gerar resumo</strong>
             </label>
           </div>
@@ -51,7 +54,8 @@ const PdfTools: React.FC = () => {
 
         <div className={styles.optionsGroup}>
           <div className={styles.dropdown}>
-            <select className={styles.selectDropdown}
+            <select
+              className={styles.selectDropdown}
               value={selectedLanguage}
               onChange={(e) => setSelectedLanguage(e.target.value)}
             >
@@ -70,7 +74,7 @@ const PdfTools: React.FC = () => {
                 type="checkbox"
                 checked={translateText}
                 onChange={() => setTranslateText(!translateText)}
-              /> 
+              />
               <strong>Traduzir texto</strong>
             </label>
           </div>
