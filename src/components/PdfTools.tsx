@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "../styles/PdfTools.module.css"; // Importando o CSS Module
-import { downloadFile, downloadSummaryFile } from "@/utils/api";
+import { downloadFile, downloadSummaryFile, translateFile, downloadTranslatedFile } from "@/utils/api";
 import { useFile } from "@/components/FileContext";
 
 const PdfTools: React.FC = () => {
@@ -10,11 +10,15 @@ const PdfTools: React.FC = () => {
   const [translateText, setTranslateText] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const { fileName } = useFile();
+  const { file } = useFile();
 
   const handleDownload = () => {
     if (fileName) {
       if (generateSummary) {
         downloadSummaryFile(fileName);
+      } else if (selectedLanguage){
+        translateFile(file, selectedLanguage);
+        downloadTranslatedFile(fileName);
       } else {
         downloadFile(fileName);
       }
