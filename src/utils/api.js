@@ -1,8 +1,9 @@
 const API_URL = "http://localhost:8081/api/file";
 
-export const uploadFile = async (file) => {
+export const uploadFile = async (file, ratio=0.2) => {
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("ratio", ratio);
 
   const response = await fetch(`${API_URL}/uploadFile`, {
     method: "POST",
