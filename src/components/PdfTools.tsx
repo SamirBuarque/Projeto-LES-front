@@ -1,24 +1,27 @@
 "use client";
 
+const API_URL = "http://localhost:8081/api/file";
 import React, { useState } from "react";
 import styles from "../styles/PdfTools.module.css"; // Importando o CSS Module
-import { downloadFile, downloadSummaryFile, translateFile, downloadTranslatedFile } from "@/utils/api";
+import {
+  downloadFile,
+  downloadSummaryFile,
+  translateFile,
+} from "@/utils/api";
 import { useFile } from "@/components/FileContext";
 
 const PdfTools: React.FC = () => {
-  const [generateSummary, setGenerateSummary] = useState(false);
-  const [translateText, setTranslateText] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("");
-  const { fileName } = useFile();
-  const { file } = useFile();
+  const [selectedOption, setSelectedOption] = useState("");
+  const { fileName, file } = useFile();
 
-  const handleDownload = () => {
+
+  const handleDownload = async () => {
     if (fileName) {
-      if (generateSummary) {
+      if (selectedOption === "generateSummary") {
         downloadSummaryFile(fileName);
-      } else if (selectedLanguage){
+      } else if (selectedOption === "translateText") {
         translateFile(file, selectedLanguage);
-        downloadTranslatedFile(fileName);
       } else {
         downloadFile(fileName);
       }
@@ -26,13 +29,7 @@ const PdfTools: React.FC = () => {
       alert("Nenhum arquivo disponível para download");
     }
   };
-  const handleConfirm = () => {
-    console.log({
-      generateSummary,
-      translateText,
-      selectedLanguage,
-    });
-  };
+  
 
   return (
     <div className={styles.container}>
@@ -42,22 +39,27 @@ const PdfTools: React.FC = () => {
         <div className={styles.pdfGroup}>
           <div className={styles.pdfIcon}>{/* Ícone do PDF */}</div>
 
-          <div className={styles.tools}>
-            <label>
-              <input
-                type="checkbox"
-                checked={generateSummary}
-                onChange={() => {
-                  setGenerateSummary(!generateSummary);
-                }}
-              />
-              <strong>Gerar resumo</strong>
-            </label>
-          </div>
         </div>
 
         <div className={styles.optionsGroup}>
-          <div className={styles.dropdown}>
+
+        <div className={styles.dropdown}>
+            <select
+              className={styles.selectDropdown}
+              value={selectedOption}
+              onChange={(e) => {
+                setSelectedOption(e.target.value)
+              }}
+            >
+              <option value="">Selecione um serviço</option>
+              <option value="generateSummary">Gerar resumo</option>
+              <option value="translateText">Traduzir texto</option>
+              
+            </select>
+          </div>
+
+          {selectedOption === "translateText" && (
+            <div className={styles.dropdown}>
             <select
               className={styles.selectDropdown}
               value={selectedLanguage}
@@ -68,20 +70,11 @@ const PdfTools: React.FC = () => {
               <option value="es">Espanhol</option>
               <option value="fr">Francês</option>
               <option value="de">Alemão</option>
-              <option value="pt-br">Português (Brasil)</option>
+              <option value="pt">Português (Brasil)</option>
             </select>
           </div>
+          )}
 
-          <div className={styles.tools}>
-            <label>
-              <input
-                type="checkbox"
-                checked={translateText}
-                onChange={() => setTranslateText(!translateText)}
-              />
-              <strong>Traduzir texto</strong>
-            </label>
-          </div>
         </div>
       </div>
 
