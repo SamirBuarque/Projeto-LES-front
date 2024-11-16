@@ -12,6 +12,7 @@ const FileUpload: React.FC = () => {
   const [uploadStatus, setUploadStatus] = useState<string | null>(null)
   const router = useRouter();
   const { setFileName } = useFile();
+  const { setFile } = useFile();
   
   const preventDefaults = (e: React.DragEvent | React.ChangeEvent) => {
     e.preventDefault();
@@ -45,6 +46,7 @@ const FileUpload: React.FC = () => {
     if (file && file.type === "application/pdf") {
       setFileInfo(`Arquivo PDF carregado: ${file.name}`);
       setFileName(file.name);
+      setFile(file);
       uploadFileToServer(file);
     } else {
       setFileInfo("Por favor, selecione um arquivo PDF.");
